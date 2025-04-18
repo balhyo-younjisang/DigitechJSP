@@ -1,0 +1,35 @@
+create table TBL_EMP_202304 (
+	no		varchar2(5)		primary key,
+	id		varchar2(50),
+	pass	varchar2(20),
+	name	varchar2(20),
+	birth	date,
+	gender	char(1),
+	dept	char(1),
+	d_fg	char(1)
+);
+
+insert into TBL_EMP_202304 values ('00001', 'hoho11', '1234', '홍길동', '050308', '1', '1', '1');
+select * from TBL_EMP_202304 where id = '0000';
+
+drop table tbl_dept_202304;
+
+create table TBL_DEPT_202304(
+	d_code		char(1)		primary key,
+	d_name		varchar2(20)
+);
+
+insert into TBL_DEPT_202304 values ('1', '인사팀');
+insert into TBL_DEPT_202304 values ('2', '영업팀');
+insert into TBL_DEPT_202304 values ('3', '개발1팀');
+insert into TBL_DEPT_202304 values ('4', '개발2팀');
+
+select TO_CHAR(emp.no + 1, '00000') as no, sysdate as today from TBL_EMP_202304 emp;
+
+select dept.* from TBL_DEPT_202304 dept;
+
+delete from TBL_EMP_202304 where id >= '00002';
+
+insert into TBL_EMP_202304 values ('00002', 'haha1111', '2222', '고길동', '250328', '1', '3', '0');
+
+SELECT TO_CHAR(emp.no, '00000') as no, emp.id as id,  emp.name as name, TO_CHAR(emp.birth, 'yyyy-mm-dd') as birth, case emp.gender when '0' then '남자' when '1' then '여자' end as gender, dept.d_name as dept, emp.d_fg FROM TBL_EMP_202304 emp, TBL_DEPT_202304 dept WHERE emp.dept = dept.d_code ORDER BY no

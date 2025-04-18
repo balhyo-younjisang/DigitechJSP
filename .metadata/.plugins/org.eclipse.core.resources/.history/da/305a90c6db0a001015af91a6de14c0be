@@ -1,0 +1,64 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="demo0327.DBConnection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+Connection conn = DBConnection.getConnection();
+String sql = "select TO_CHAR(MAX(no) + 1, '00000') as no, sysdate as today from TBL_EMP_202304";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+ResultSet rs = pstmt.executeQuery();
+
+String no = "", today = "";
+if (rs.next()) {
+	no = rs.getString("no");
+	today = rs.getString("today");
+}
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>시멘틱 웹 페이지 | 다양한 Input 연습</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<header>
+	 	<div>
+	 		<a href="index.jsp">시맨틱 웹 페이지</a>
+	 	</div>
+		<nav>
+			<ul class="gnb">
+				<li><a href="#">홈</a></li>
+				<li><a href="#">등록</a></li>
+				<li><a href="#">등록2</a></li>
+				<li><a href="#">조회</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<h2> 등록2 </h2>
+		<form action="index_action.jsp">
+			<table border="1">
+				<tr>
+					<td>사번</td>
+					<td>
+						<input readonly="readonly" value=<%=no %>> 자동채번
+					</td>
+				</tr>
+				
+				<tr>
+					<td>아이디</td>
+					<td>
+						<input readonly="readonly" value=<%=no %>> 예) s1234
+					</td>
+				</tr>
+			</table>
+		</form>
+	</main>
+	<footer>
+		© 2025. SDHS. All rights reserved.©
+	</footer>
+</body>
+</html>

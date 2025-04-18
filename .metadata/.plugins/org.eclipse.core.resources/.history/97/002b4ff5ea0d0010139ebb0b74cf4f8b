@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%@ include file="./component/header.jsp"%>
+	<main>
+		<h2>출석정보입력</h2>
+		<section class="content">
+			<form onsubmit="return check()" action="register_action.jsp" method="post">
+				<table border="1" >
+					<tr>
+						<td>학번</td>
+						<td><input type="text" name="std_no" value=<%=currentStdNo %> readonly></td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td><input type="text" name="std_nm" data-name="이름"></td>
+					</tr>
+					<tr>
+						<td>출석</td>
+						<td>
+							<input type="radio" name="std_att" value="1">
+							<input type="radio" name="std_att" value="0">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit">등록</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</section>
+	</main>
+	<%@ include file="./component/footer.jsp"%>
+</body>
+</html>

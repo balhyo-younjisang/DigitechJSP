@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>네일아트 관리 프로그램</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<%@ include file="./component/header.jsp" %>
+	<main>
+		<section class="title"></section>
+	</main>
+	<%@ include file="./component/footer.jsp" %>
+</body>
+</html>

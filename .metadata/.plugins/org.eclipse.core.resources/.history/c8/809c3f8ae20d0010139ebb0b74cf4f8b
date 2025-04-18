@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+header {
+	width: 100vw;
+	height: 180px;
+}

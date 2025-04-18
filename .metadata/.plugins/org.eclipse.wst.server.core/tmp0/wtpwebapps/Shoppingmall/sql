@@ -1,0 +1,20 @@
+select * from member_tbl_02;
+
+delete from MEMBER_TBL_02 where custname is NULL;
+
+SELECT custno, custname, phone, address, TO_CHAR(joindate,'YYYY-MM-DD') as joindate, case when grade = 'A' then 'VIP' when grade = 'B' then '일반' when grade = 'C' then '직원' END as grade, city FROM member_tbl_02;
+
+
+SELECT custno, custname, phone, address, TO_CHAR(joindate,'YYYY-MM-DD') as joindate, case when grade = 'A' then 'VIP' when grade = 'B' then '일반' when grade = 'C' then '직원' END as grade, city FROM member_tbl_02;
+
+SELECT M.custno, C.custname, CASE   WHEN C.grade = 'A' THEN 'VIP' WHEN C.grade = 'B' THEN '일반' WHEN C.grade = 'C' THEN '직원' END AS grade, SUM(M.price) as sales FROM MONEY_TBL_02 M JOIN Member_tbl_02 C ON M.custno = C.custno GROUP BY M.custno, C.custname, C.grade ORDER BY sales desc
+
+
+create table 테이블명(
+	컬럼명1		컬럼타입(사이즈)		제약조건,
+	컬럼명2		컬럼타입(사이즈)		제약조건,
+	컬럼명3		컬럼타입(사이즈)		제약조건,
+	constraint 제약조건명 primary key (컬럼명1, 컬럼명2..)
+	constraint 제약조건명 foreign key(컬럼명3) references 참조테이블
+	-- money_tbl_02 > mt02_pk
+)

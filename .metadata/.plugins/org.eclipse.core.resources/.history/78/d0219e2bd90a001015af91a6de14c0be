@@ -1,0 +1,12 @@
+create table TBL_EMP_202304 (
+	no		varchar2(5)		primary key,
+	id		varchar2(50),
+	pass	varchar2(20),
+	name	varchar2(20),
+	birth	date,
+	gender	char(1),
+	dept	char(1),
+	d_fg	char(1)
+);
+
+insert into TBL_EMP_202304 values ('00001', 'hoho11', '1234', '홍길동', 050308, '1', '1', '1');

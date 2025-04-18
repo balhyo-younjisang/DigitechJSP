@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	String message = (String) request.getAttribute("message");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<%
+	if(message != null) {
+%>
+<script>
+	alert(<%=message%>);
+</script>
+<%
+}%>
+	<%@ include file="./component/header.jsp"%>
+	<main>
+		<h2>수정</h2>
+		<form action="get_action.jsp" method="get">
+			<table border="1">
+				<tr>
+					<td>사번</td>
+					<td><input type="text" maxlength="5" name="no"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="submit">불러오기</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</main>
+	<%@ include file="./component/footer.jsp"%>
+</body>
+</html>

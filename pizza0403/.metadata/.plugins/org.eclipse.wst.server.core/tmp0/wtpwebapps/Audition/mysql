@@ -1,0 +1,125 @@
+DROP table emp;
+ 
+CREATE TABLE EMP
+        (EMPNO NUMBER(4) NOT NULL,
+         ENAME VARCHAR2(10),
+         JOB VARCHAR2(9),
+         MGR NUMBER(4),
+         HIREDATE DATE,
+         SAL NUMBER(7, 2),
+         COMM NUMBER(7, 2),
+         DEPTNO NUMBER(2));
+ 
+ INSERT INTO EMP VALUES
+         (7369, 'SMITH',  'CLERK',     7902,
+         TO_DATE('17-12-1980', 'DD-MM-YYYY'),  800, NULL, 20);
+         
+ INSERT INTO EMP VALUES
+         (7499, 'ALLEN',  'SALESMAN',  7698,
+         TO_DATE('20-02-1981', 'DD-MM-YYYY'), 1600,  300, 30);
+ 
+ INSERT INTO EMP VALUES
+         (7521, 'WARD',   'SALESMAN',  7698,
+         TO_DATE('22-02-1981', 'DD-MM-YYYY'), 1250,  500, 30);
+ 
+ INSERT INTO EMP VALUES
+         (7566, 'JONES',  'MANAGER',   7839,
+         TO_DATE('02-04-1981', 'DD-MM-YYYY'),  2975, NULL, 20);
+ 
+ INSERT INTO EMP VALUES
+         (7654, 'MARTIN', 'SALESMAN',  7698,
+         TO_DATE('28-09-1981', 'DD-MM-YYYY'), 1250, 1400, 30);
+ 
+ INSERT INTO EMP VALUES
+         (7698, 'BLAKE',  'MANAGER',   7839,
+         TO_DATE('01-05-1981', 'DD-MM-YYYY'),  2850, NULL, 30);
+ 
+ INSERT INTO EMP VALUES
+         (7782, 'CLARK',  'MANAGER',   7839,
+         TO_DATE('09-06-1981', 'DD-MM-YYYY'),  2450, NULL, 10);
+ 
+ INSERT INTO EMP VALUES
+         (7788, 'SCOTT',  'ANALYST',   7566,
+         TO_DATE('09-12-1982', 'DD-MM-YYYY'), 3000, NULL, 20);
+ 
+ INSERT INTO EMP VALUES
+         (7839, 'KING',   'PRESIDENT', NULL,
+         TO_DATE('17-11-1981', 'DD-MM-YYYY'), 5000, NULL, 10);
+ 
+ INSERT INTO EMP VALUES
+         (7844, 'TURNER', 'SALESMAN',  7698,
+         TO_DATE('08-09-1981', 'DD-MM-YYYY'),  1500, NULL, 30);
+ 
+ INSERT INTO EMP VALUES
+         (7876, 'ADAMS',  'CLERK',     7788,
+         TO_DATE('12-01-1983', 'DD-MM-YYYY'), 1100, NULL, 20);
+ 
+ INSERT INTO EMP VALUES
+         (7900, 'JAMES',  'CLERK',     7698,
+         TO_DATE('03-12-1981', 'DD-MM-YYYY'),   950, NULL, 30);
+ 
+ INSERT INTO EMP VALUES
+         (7902, 'FORD',   'ANALYST',   7566,
+         TO_DATE('03-12-1981', 'DD-MM-YYYY'),  3000, NULL, 20);
+ 
+ INSERT INTO EMP VALUES
+         (7934, 'MILLER', 'CLERK',     7782,
+         TO_DATE('23-01-1982', 'DD-MM-YYYY'), 1300, NULL, 10);`
+ 
+         select * from emp;
+         
+ drop table dept;
+ CREATE TABLE DEPT
+        (DEPTNO NUMBER(2),
+         DNAME VARCHAR2(14),
+         LOC VARCHAR2(13) );
+ 
+ INSERT INTO DEPT VALUES (10, 'ACCOUNTING', 'NEW YORK');
+ INSERT INTO DEPT VALUES (20, 'RESEARCH',   'DALLAS');
+ INSERT INTO DEPT VALUES (30, 'SALES',      'CHICAGO');
+ INSERT INTO DEPT VALUES (40, 'OPERATIONS', 'BOSTON');
+
+ drop table salgrade;
+ 
+ CREATE TABLE SALGRADE
+         (GRADE NUMBER,
+          LOSAL NUMBER,
+          HISAL NUMBER);
+ 
+ INSERT INTO SALGRADE VALUES (1,  700, 1200);
+ INSERT INTO SALGRADE VALUES (2, 1201, 1400);
+ INSERT INTO SALGRADE VALUES (3, 1401, 2000);
+ INSERT INTO SALGRADE VALUES (4, 2001, 3000);
+ INSERT INTO SALGRADE VALUES (5, 3001, 9999);
+ 
+-- 사원의 이름과 부서번호(DEPTNO)를 조회하되, 중복 없이 출력하세요.
+ select distinct ENAME, DEPT.DEPTNO FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO;
+ 
+-- 급여에 10% 인상된 결과를 함께 조회하세요 (ENAME, SAL, 인상된 급여).
+ SELECT ENAME, TO_CHAR(SAL, '999,999'), TO_CHAR(SAL * 1.1, '999,999') AS RAISED_SAL FROM EMP;
+ 
+-- 3. 급여와 커미션의 합계를 TOTAL로 출력하세요. (NULL은 0으로 치환)
+ SELECT ENAME, TO_CHAR(SAL, '999,999') AS SAL, TO_CHAR(NVL(), '999,999') AS COMM, TO_CHAR(SAL + NVL(COMM, 0), '999,999,999') AS TOTAL FROM EMP;
+ 
+-- 커미션을 받지 않는 사원들의 사번과 사원정보(직무(JOB),이름), 고용일(HIREDATE)를
+--출력하세요. (정렬은 직무와 고용일의 오름차순)
+ SELECT EMPNO, JOB || '_' || ENAME EMP_INFO, TO_CHAR(TO_DATE(HIREDATE), 'YYYY-MM-DD') AS HIREDATE FROM EMP WHERE COMM IS NULL ORDER BY JOB, HIREDATE;
+ 
+-- 이름의 두번째 글자가 'A'인 사원들의 이름을 조회하세요.
+ SELECT ENAME FROM EMP WHERE ENAME like '_A%';
+ 
+-- 6. 1981년에 입사한 사원들의 이름과 입사일을 조회하세요.
+ SELECT ENAME, TO_CHAR(TO_DATE(HIREDATE), 'yyyy') FROM EMP WHERE TO_CHAR(TO_DATE(HIREDATE), 'yyyy') = '1981';
+ 
+-- 직무별 사원 수를 구하세요.(사원수가 3이상인 직무만 출력하고 인원수의 내림차순, 직무의 오름차순으로 정렬)
+ SELECT JOB, COUNT(JOB) CNT FROM EMP GROUP BY JOB HAVING COUNT(JOB) >= 3 ORDER BY CNT desc, job;
+ 
+-- KING과 같은 부서에 속한 사원들을 조회하세요.
+SELECT ENAME, DEPTNO FROM EMP WHERE DEPTNO = ( SELECT DEPTNO FROM EMP WHERE ENAME = 'KING');
+
+--가장 최근에 입사한 사원을 조회하세요.
+SELECT EMPNO, ENAME, JOB, MGR, SAL, COMM FROM EMP WHERE HIREDATE = (
+SELECT MAX(TO_CHAR(TO_DATE(HIREDATE), 'yyyy-mm-dd')) FROM emp);
+
+--각 사원의 이름과 그 사원의 관리자 이름, 그리고 관리자 직무를 조회하세요.
+SELECT emp1.ENAME, emp2.ENAME, emp2.JOB FROM EMP emp1 LEFT JOIN EMP emp2 on emp1.MGR = emp2.EMPNO;

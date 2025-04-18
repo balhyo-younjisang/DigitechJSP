@@ -1,0 +1,48 @@
+package pizza0403;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class DBConnectoin {
+	public static Connection getConnection() {
+		Connection conn = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "1234");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB Connection Failed :: " + e.getMessage());
+		}
+
+		return conn;
+	}
+
+	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
+		try {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB Close Failed :: " + e.getMessage());
+		}
+	}
+
+	public static void close(PreparedStatement pstmt, Connection conn) {
+		try {
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB Close Failed :: " + e.getMessage());
+		}
+	}
+}

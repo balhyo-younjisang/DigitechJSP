@@ -1,0 +1,61 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="car.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Connection conn = DBConnection.getConnection();
+	String sql = "SELECT * FROM TBL_DEALER_202504 order by DEALER_ID";
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	ResultSet rs = pstmt.executeQuery();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>중고차 관리 프로그램</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<%@ include file="./component/header.jsp" %>
+	<main>
+		<section class="title">
+			<h2>차량 등록</h2>
+		</section>
+		<section class="content">
+			<form action="register_action.jsp" method="post">
+				<table border="1">
+					<tr>
+						<td>차량명</td>
+						<td><input type="text" name="CAR_NAME" id="CAR_NAME"></td>
+					</tr>
+					<tr>
+						<td>매입가</td>
+						<td><input type="number" name="BUY_PRICE" id="BUY_PRICE"></td>
+					</tr>
+					<tr>
+						<td>딜러 선택</td>
+						<td>
+							<select name="DEALER_ID" id="DEALER_ID">
+								<option value="">선택</option>
+								<%
+									while(rs.next()) {
+								%>
+									<option value=<%=rs.getString("DEALER_ID") %>><
+								<%
+									}
+								%>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</section>
+	</main>
+	<%@ include file="./component/footer.jsp" %>
+</body>
+<%
+	DBConnection.close(rs, pstmt, conn);
+%>
+</html>

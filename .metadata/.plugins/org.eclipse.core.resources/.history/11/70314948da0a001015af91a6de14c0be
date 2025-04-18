@@ -1,0 +1,28 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="demo0327.DBConnection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Connection conn = DBConnection.getConnection();
+	String sql = "select TO_CHAR(no + 1, '00000') as no, sysdate as today from TBL_EMP_202304";
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	ResultSet rs = pstmt.executeQuery();
+	
+	String no, today = "";
+	if(rs.next()) {
+		no = rs.getString("no");
+		no = rs.getString("today");
+	}
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>시멘틱 웹 페이지 | 다양한 Input 연습</title>
+</head>
+<body>
+
+</body>
+</html>

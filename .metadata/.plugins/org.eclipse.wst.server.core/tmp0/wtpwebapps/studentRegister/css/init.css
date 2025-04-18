@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+:root {
+	--primary: #FEA230;
+	--secondary: #2A6786;
+	--background: #F7F5E8;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	background-color: var(--background);
+}
+
+ul, li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}

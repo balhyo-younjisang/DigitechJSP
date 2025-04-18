@@ -1,0 +1,13 @@
+package nailart;
+
+import java.sql.Connection;
+
+public class DBConnection {
+	public static Connection getConnection() {
+		Connection conn = null;
+		
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+		}
+	}
+}

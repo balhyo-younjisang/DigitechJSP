@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ul, li {
+	list-style: none;
+}
+
+ main {
+	width: 100vw;
+ }
+ 
+ .title {
+	 text-align: center;
+	 line-height: 120px;
+	 font-size: 30px;
+ }
+ 
+ main ul, .subtitle {
+	 padding: 20px;
+	 line-height: 30px;
+ }

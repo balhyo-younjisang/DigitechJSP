@@ -1,0 +1,61 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="rollbook.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+Connection conn = DBConnection.getConnection();
+String sql = "SELECT STD_NO, STD_NM, STD_ATT FROM TBL_STD_001 WHERE STD_NO = ?";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+pstmt.setString(1, request.getParameter("std_no"));
+ResultSet rs = pstmt.executeQuery();
+rs.next();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>출석부 프로그램</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<%@ include file="./component/header.jsp"%>
+	<main>
+		<h2>출석정보입력</h2>
+		<section class="content">
+			<form action="edit_action.jsp"
+				method="post">
+				<table border="1">
+					<tr>
+						<td>학번</td>
+						<td><p><%=rs.getString("std_no")%>
+							</p></td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td><p><%=rs.getString("std_nm")%>
+							</p></td>
+					</tr>
+					<tr>
+						<td>출석</td>
+						<td><input type="radio" name="std_att" value="1"
+							<%if (rs.getString("std_att").equals("1")) {%> checked <%}%>>출석
+							<input type="radio" name="std_att" value="0"
+							<%if (rs.getString("std_att").equals("0")) {%> checked <%}%>>결석</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit">등록</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</section>
+	</main>
+	<%@ include file="./component/footer.jsp"%>
+</body>
+<%
+DBConnection.close(rs, pstmt, conn);
+%>
+</html>

@@ -1,0 +1,52 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="demo0327.DBConnection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Connection conn = DBConnection.getConnection();
+	String sql = "SELECT TO_CHAR(emp.no, '00000') as no, emp.id as id, emp.pass as pass, emp.name as name, TO_CHAR(emp.birth, 'yyyy-mm-dd') as birth, case emp.gender when '0' then '남자' when '1' then '여자' end, dept.d_code, emp.d_fg FROM TBL_EMP_202304 emp, TBL_DEPT_202304 dept WHERE emp.dept = dept.d_code ORDER BY no";
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	ResultSet rs = pstmt.executeQuery();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%@ include file="./component/header.jsp" %>
+	<main>
+		<h2>조회</h2>
+		<table border="1">
+			<tr>
+				<th>사번</th>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>생년월일</th>
+				<th>성별</th>
+				<th>성별</th>
+			</tr>
+			<%
+				while(rs.next()) {
+			%>
+				<tr>
+					<td><%=rs.getString("no") %></td>
+					<td><%=rs.getString("no") %></td>
+					<td><%=rs.getString("no") %></td>
+					<td><%=rs.getString("no") %></td>
+					<td><%=rs.getString("no") %></td>
+					<td><%=rs.getString("no") %></td>
+					<td><%=rs.getString("no") %></td>
+					<td><%=rs.getString("no") %></td>
+				</tr>
+			<%
+				}
+			%>
+		</table>
+	</main>
+	<%@ include file="./component/footer.jsp" %>
+</body>
+</html>

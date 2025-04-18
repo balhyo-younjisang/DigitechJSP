@@ -1,0 +1,61 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="rollbook.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	String currentStdNo = null;
+
+	Connection conn = DBConnection.getConnection();
+	String sql = "SELECT TO_CHAR(nvl(max(std_no), 0) + 1, '00000') as std_no FROM tbl_std_001";
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	ResultSet rs = pstmt.executeQuery();
+	
+	if(rs.next()) currentStdNo = rs.getString("std_no");
+	
+	DBConnection.close(rs, pstmt, conn);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>출석부 프로그램</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<%@ include file="./component/header.jsp"%>
+	<main>
+		<h2>출석부 프로그램 v1</h2>
+		<section class="content">
+			<form action="register_action.jsp" method="post">
+				<table border="1" >
+					<tr>
+						<td>학번</td>
+						<td><input type="text" name="std_no" value=<%=currentStdNo %> readonly></td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td><input type="text" name="std_nm"></td>
+					</tr>
+					<tr>
+						<td>주민번호</td>
+						<td><input type="text" name="std_birth">-<input type="text" name="std_birth"></td>
+					</tr>
+					<tr>
+						<td>주소</td>
+						<td><input type="text" name="std_address"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit">등록</button>
+							<button onclick="reset()">다시쓰기</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</section>
+	</main>
+	<%@ include file="./component/footer.jsp"%>
+</body>
+</html>

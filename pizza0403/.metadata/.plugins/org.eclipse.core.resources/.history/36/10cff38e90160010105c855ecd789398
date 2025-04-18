@@ -1,0 +1,18 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="golf.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+Connection member_conn = DBConnection.getConnection();
+
+String member_sql = "SELECT MEM_NO, MEM_NM FROM tbl_member_202305";
+PreparedStatement member_pstmt = member_conn.prepareStatement(member_sql);
+ResultSet member_rs = member_pstmt.executeQuery();
+
+Connection class_conn = DBConnection.getConnection();
+String class_sql = "SELECT class_nm, class_price from tbl_teacher_202305";
+PreparedStatement class_pstmt = class_conn.prepareStatement(class_sql);
+ResultSet class_rs = class_pstmt.executeQuery();
+%>

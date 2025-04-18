@@ -1,0 +1,16 @@
+package demo0327;
+
+import java.sql.Connection;
+
+public class DBConnection {
+	public static Connection getConnection() {
+		Connection conn = null;
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB Connection failed :: ", e.getMessage());
+		}
+	}
+}

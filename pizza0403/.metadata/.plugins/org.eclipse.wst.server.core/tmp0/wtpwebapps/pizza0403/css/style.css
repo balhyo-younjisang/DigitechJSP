@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ul, li {
+	list-style: none;
+}
+
+img {
+	vertical-align: middle;
+}
+
+header {
+	width: 100vw;
+	height: 240px;
+}
+
+header > div {
+	height: 160px;
+	width: 100%;
+	background-color: floralwhite;
+	color: blueviolet;
+	font-size: 32px;
+	line-height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+}
+
+header nav .gnb {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+	width: 100vw;
+	height: 80px;
+	padding-left: 60px;
+	background-color: gainsboro;
+	color: black;
+	font-weight: bold;
+	font-size: 20px
+}
+
+header nav .gnb li a {
+	transition: all .3s;
+}
+
+header nav .gnb li a:hover {
+	color: blueviolet;
+}
+
+main {
+	width: 100vw;
+	height: calc(100vh - 240px - 120px);
+	display: flex;
+	flex-direction: column;
+}
+
+main .title {
+	line-height: 120px;
+	text-align: center;
+}
+
+main .content p:first-child {	
+	font-weight: 700;
+}
+
+main .content {
+	line-height: 32px;
+}
+
+main .content {
+	display: flex;
+	width: 100vw;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+main .content form td {
+	padding: 5px 15px
+}
+
+main .content form td[colspan="2"] {
+	text-align: center;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 28px;
+	font-weight: bold;
+	height: 120px;
+	background-color: gainsboro;
+	color: cadetblue;
+}

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+footer {
+	width: 100vw;
+	height: 200px;
+	background-color: lightgray;
+	color: black;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+footer h4 {
+	font-size: 40px;
+}

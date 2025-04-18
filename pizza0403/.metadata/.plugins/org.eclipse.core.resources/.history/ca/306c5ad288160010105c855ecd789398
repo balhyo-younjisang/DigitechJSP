@@ -1,0 +1,16 @@
+package golf;
+
+import java.sql.Connection;
+
+public class DBConnection {
+	public static Connection getConnection() {
+		Connection conn = null'
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			
+		} catch (Exception e) {
+			System.out.println("DBConnection Failed :: e");
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,14 @@
+package rollbook;
+
+import java.sql.Connection;
+
+public class DBConnection {
+	public static Connection getConnection() {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB Connection Failed :: " + e.getMessage());
+		}
+	}
+}

@@ -1,0 +1,160 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="demo0327.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+Connection conn = DBConnection.getConnection();
+String sql_member = "SELECT TO_CHAR(no, '00000') as no, id, pass, name, birth, gender, dept, d_fg FROM TBL_EMP_202304 WHERE no = ?";
+PreparedStatement pstmt = conn.prepareStatement(sql_member);
+pstmt.setString(1, request.getParameter("no"));
+ResultSet rs = pstmt.executeQuery();
+
+String no = "", id = "", pass = "", name = "", birth = "", gender = "", dept = "", d_fg = "";
+if (rs.next()) {
+	no = rs.getString("no");
+	id = rs.getString("id");
+	pass = rs.getString("pass");
+	name = rs.getString("name");
+	birth = rs.getString("birth");
+	gender = rs.getString("gender");
+	dept = rs.getString("dept");
+	d_fg = rs.getString("d_fg");
+}
+
+if(no.equals("")) {
+	response.sendRedirect("get.jsp");
+}
+
+rs.close();
+pstmt.close();
+
+String sql_dept = "SELECT d_code, d_name FROM TBL_DEPT_202304";
+pstmt = conn.prepareStatement(sql_dept);
+rs = pstmt.executeQuery();
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<%@ include file="./component/header.jsp"%>
+	<main>
+		<h2>수정</h2>
+		<form onsubmit="return handleSubmit()" action="edit_action.jsp"
+			method="post">
+			<table border="1">
+				<tr>
+					<td>사번</td>
+					<td><input type="text" readonly="readonly" value=<%=no%>
+						name="no"></td>
+				</tr>
+
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" value=<%=id%> name="id"> 예)
+						s1234</td>
+				</tr>
+
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" value=<%=pass%> name="pass">
+						예) ****</td>
+				</tr>
+
+				<tr>
+					<td>사원명</td>
+					<td><input type="text" value=<%=name%> name="name"> 예)
+						홍길동</td>
+				</tr>
+
+				<tr>
+					<td>생년월일</td>
+					<td><input type="date" value=<%=birth%> name="birth"></td>
+				</tr>
+
+				<tr>
+					<td>성별</td>
+					<td><input type="radio" value="0" name="gender"
+						<%if (gender.equals("0")) {%> checked <%}%>>남 <input
+						type="radio" value="1" name="gender" <%if (gender.equals("1")) {%>
+						checked <%}%>>여</td>
+				</tr>
+
+				<tr>
+					<td>소속</td>
+					<td><select name="dept">
+							<%
+							while (rs.next()) {
+							%>
+							<option value=<%=rs.getString("d_code")%>
+								<%if (rs.getString("d_code").equals(dept)) {%> selected <%}%>><%=rs.getString("d_name")%></option>
+							<%
+							}
+							%>
+					</select></td>
+				</tr>
+
+				<tr>
+					<td>장애여부</td>
+					<td><input type="checkbox" name="d_fg"
+						<%if (d_fg.equals("0")) {%> checked <%}%>> 해당없음 체크</td>
+				</tr>
+
+				<tr>
+					<td colspan="2" style="text-align: center;">
+						<button type="submit">수정</button>
+						<button type="button" onclick="reset()">다시쓰기</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</main>
+	<%@ include file="./component/footer.jsp"%>
+</body>
+<script>
+	function handleSubmit() {
+		const no = document.getElementsByName("no")[0].value;
+		const id = document.getElementsByName("id")[0].value;
+		const pass = document.getElementsByName("pass")[0].value;
+		const name = document.getElementsByName("name")[0].value;
+		const birth = document.getElementsByName("birth")[0].value;
+		const gender = document.getElementsByName("gender")[0].value;
+		const dept = document.getElementsByName("dept")[0].value;
+
+		if (!no) {
+			alert("사번은 입력되어야 합니다.");
+			return false;
+		} else if (!id) {
+			alert("아이디를 입력해주세요.");
+			return false;
+		} else if (!pass) {
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		} else if (!name) {
+			alert("이름을 입력해주세요.");
+			return false;
+		} else if (!birth) {
+			alert("생년월일을 입력해주세요.");
+			return false;
+		} else if (!gender) {
+			alert("성별을 입력해주세요.");
+			return false;
+		} else if (!dept) {
+			alert("소속을 입력해주세요.");
+			return false;
+		}
+
+		return true;
+	}
+</script>
+<%
+	rs.close();
+	pstmt.close();
+	conn.close();
+%>
+</html>

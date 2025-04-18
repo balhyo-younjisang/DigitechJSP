@@ -1,0 +1,30 @@
+<%@page import="golf.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	Connection conn = DBConnection.getConnection();
+	String sql = "SELECT teacher_cd, teacher_nm, class_nm, TRIM(TO_CHAR(class_price, 'L999,999,999')), TO_CHAR(TO_DATE(register_date), 'yyyy\"년\"mm\"월\"dd\"일\"') from tbl_teacher_202305";
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>골프 연습장 회원관리 프로그램 ver 1.0</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<%@ include file="./component/header.jsp"%>
+	<main>
+		<section class="title">
+			<h2>강사조회</h2>
+		</section>
+		<section class="content">
+			<form>
+				<table></table>
+			</form>
+		</section>
+	</main>
+	<%@ include file="./component/footer.jsp"%>
+</body>
+</html>

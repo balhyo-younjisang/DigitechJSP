@@ -1,0 +1,42 @@
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="demo0327.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+String no = request.getParameter("no");
+String id = request.getParameter("id");
+String pass = request.getParameter("pass");
+String name = request.getParameter("name");
+String birth = request.getParameter("birth");
+String gender = request.getParameter("gender");
+String dept = request.getParameter("dept");
+String d_fg = request.getParameter("d_fg");
+
+Connection conn = DBConnection.getConnection();
+String sql = "INSERT INTO TBL_EMP_202304 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+
+pstmt.setString(1, no);
+pstmt.setString(2, id);
+pstmt.setString(3, pass);
+pstmt.setString(4, name);
+pstmt.setString(5, birth);
+pstmt.setString(6, gender);
+pstmt.setString(7, dept);
+pstmt.setString(8, d_fg);
+
+if(pstmt.executeUpdate() > 0) {
+	response.sendRedirect("index.jsp");
+}
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

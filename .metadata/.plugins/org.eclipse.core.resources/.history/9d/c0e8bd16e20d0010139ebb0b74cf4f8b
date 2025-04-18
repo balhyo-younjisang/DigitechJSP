@@ -1,0 +1,18 @@
+create table tbl_std_001(
+	std_no		varchar2(5)		primary key,
+	std_nm		varchar2(10)	not null,
+	std_birth	varchar2(9),
+	std_address	varchar2(40),
+	std_att		char(1),
+	constraint std_att_ch check(std_att in ('0', '1'))
+);
+
+
+alter table tbl_std_001 modify std_att default '0';
+
+insert into tbl_std_001 values ('30401', '고길동', '690511', '서울시 도봉구', '1');
+insert into tbl_std_001 values ('30402', '둘리', '8404041', '서울시 도봉구', '1');
+insert into tbl_std_001 values ('30403', '도우너', '8805041', '서울시 노원구', '1');
+insert into tbl_std_001 values ('30404', '마이콜', '7511071', '서울시 노원구', '1');
+insert into tbl_std_001 values ('30405', '고철수', '8206121', '서울시 도봉구', '1');
+insert into tbl_std_001 values ('30406', '고영희', '8304222', '서울시 도봉구', '1');

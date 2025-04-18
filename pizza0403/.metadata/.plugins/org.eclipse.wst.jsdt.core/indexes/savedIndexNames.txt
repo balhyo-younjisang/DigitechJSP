@@ -1,0 +1,14 @@
+INDEX VERSION 1.4+C:\dev\workspace\workspace0310\pizza0403\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1066388821.index
+339807644.index
+1049601833.index
+1859976986.index
+2186899505.index
+1658739851.index
+2777518273.index
+467849114.index
+3313188624.index
+2669419398.index
+3005380278.index
+685985929.index
+2324261826.index

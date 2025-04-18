@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<header>
+	<div></div>
+	<nav>
+		<ul>
+			<li><a href="teacher.jsp">강사조회</a></li>
+			<li><a href="register.jsp">강사조회</a></li>
+			<li><a href="select.jsp">강사조회</a></li>
+			<li><a href="cost.jsp">강사조회</a></li>
+			<li><a href="index.jsp">강사조회</a></li>
+		</ul>
+	</nav>
+</header>

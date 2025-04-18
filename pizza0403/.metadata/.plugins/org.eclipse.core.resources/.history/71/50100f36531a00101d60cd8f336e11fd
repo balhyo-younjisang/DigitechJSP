@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+header {
+	width: 100vw;
+	height: 18vh;
+}

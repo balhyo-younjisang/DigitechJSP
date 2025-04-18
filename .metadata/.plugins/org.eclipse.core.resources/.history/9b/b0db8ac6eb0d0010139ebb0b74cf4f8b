@@ -1,0 +1,14 @@
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="rollbook.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Connection conn = DBConnection.getConnection();
+	String sql = "UPDATE TBL_STD_001 SET STD_ATT = ? WHERE STD_NO = ?";
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1, request.getParameter("std_att"));
+	pstmt.setString(1, request.getParameter("std_no"));
+	
+	if(pstmt.executeUpdate() >= 1) response.sendRedirect("index.jsp");'
+%>

@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>출석부 프로그램</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<%@ include file="./component/header.jsp" %>
+	<main>
+		<h2>출석부 프로그램 v1</h2>
+		<p>
+			본 프로그램은 학생들의 출결 관리를 위한 프로그램입니다.
+		</p>
+		<p>
+			프로그램의 주요 기능으로는 학생등록, 출석현황이 있습니다.
+		</p>
+		<p>
+			화면의 구성요소와 기능구현은 필수사항이며, 스타일요소는 선택사항입니다
+		</p>
+	</main>
+	<%@ include file="./component/fppter.jsp" %>
+</body>
+</html>
