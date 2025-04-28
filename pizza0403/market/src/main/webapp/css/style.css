@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul, li {
+	list-style: none;
+}
+
+header {
+	height: 18vh;
+	width: 100vw;
+}
+
+header div {
+	height: 12vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+	border-bottom: 1px solid black;
+}
+
+header .gnb {
+	height: 6vh;
+	display: flex;
+	align-items: center;
+	gap: 30px;
+	padding-left: 30px;
+	width: 100vw;
+	border-bottom: 1px solid black;
+}
+
+main {
+	width: 100vw;
+	height: calc(100vh - 18vh);
+	padding: 15px;
+}
+
+main .title {
+	line-height: 120px;
+}
+
+td {
+	padding: 5px 15px;
+}
